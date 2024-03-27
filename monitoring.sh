@@ -15,7 +15,7 @@ mema=$(df -Bg | grep "^/dev/" | grep -v "/boot$" | awk '{disk_total += $2} END {
 memu=$(df -Bm | grep "^/dev/" | grep -v "/boot$" | awk '{disk_used += $3} END {print disk_used}')
 memp=$(df -m | grep "^/dev/" | grep -v "/boot$" | awk '{disk_used += $3} {disk_total+= $2} END {printf("%.2f"), disk_used/disk_total*100}')
 #CPU
-cpua=$(top -bn1 | grep "^%Cpu" | xargs | awk '{printf("%.1f%%"), $1 + $3}')
+cpua=$(top -bn1 | grep "^%Cpu" | xargs | awk '{printf("%.1f%%"), $2 + $4}')
 #Last reboot
 rebo=$(who -b | awk '{print $3 " " $4}')
 #LVM
