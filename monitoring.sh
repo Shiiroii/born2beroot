@@ -35,7 +35,7 @@ wall "	#Architecture: $arc
 		#Virtual CPU: $cpuv
 		#RAM utilization: $ramu/${rama}MB ($ramp%)
 		#Memory utilization: $memu/${mema}Gb ($memp%)
-		#CPU utilization: $cpua%
+		#CPU utilization: $cpua
 		#Last reboot: $rebo
 		#LVM: $lvmu
 		#TCP: $tcpa ESTABLISHED
