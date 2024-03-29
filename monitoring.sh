@@ -19,7 +19,7 @@ cpua=$(top -bn1 | grep "^%Cpu" | xargs | awk '{printf("%.1f%%"), $2 + $4}')
 #Last reboot
 rebo=$(who -b | awk '{print $3 " " $4}')
 #LVM
-lvmu=$(if [ $(lsblk | grep lvm | wc -l) -gt 0 ]; then echo no; else echo yes; fi)
+lvmu=$(if [ $(lsblk | grep lvm | wc -l) -gt 0 ]; then echo yes; else echo no; fi)
 #Connections
 tcpa=$(ss -t | grep ESTAB | wc -l)
 #Users
