@@ -1,15 +1,20 @@
 #! /bin/bash
 
 #Architecture
+#uname utilisé pour print le système d'exploitation sur lequel tu travailles, -a pour tout print
 archi=$(uname -a)
 #Physical CPU
+#cat /proc/cpuinfo utilisé pour obtenir les informations du processeur, grep "physical id" permet de trouver le cpu physique
 cpup=$(cat /proc/cpuinfo | grep "physical id" | wc -l)
 #Virtual CPU
-cpuv=$(cat /proc/cpuinfo | grep processor | wc -l)
+#grep processor permet de trouver le nombre de CPU
+cpuv=$(cat /proc/cpuinfo | grep 'processor' | wc -l)
 #RAM
-rama=$(free -m | grep Mem | awk '{print $2}')
-ramu=$(free -m | grep Mem | awk '{print $3}')
-ramp=$(free -m | grep Mem | awk '{printf("%.2f"), $3/$2*100}')
+#free -m permet de voir la quantité de mémoire libre, le -m pour mettre en mebibytes, une unité de capacité de stockage d'informations
+#grep Mem 
+rama=$(free -m | grep 'Mem' | awk '{print $2}')
+ramu=$(free -m | grep 'Mem' | awk '{print $3}')
+ramp=$(free -m | grep 'Mem' | awk '{printf("%.2f"), $3/$2*100}')
 #Memory
 mema=$(df -Bg | grep "^/dev/" | grep -v "/boot$" | awk '{disk_total += $2} END {print disk_total}')
 memu=$(df -Bm | grep "^/dev/" | grep -v "/boot$" | awk '{disk_used += $3} END {print disk_used}')
@@ -19,7 +24,7 @@ cpua=$(top -bn1 | grep "^%Cpu" | xargs | awk '{printf("%.1f%%"), $2 + $4}')
 #Last reboot
 rebo=$(who -b | awk '{print $3 " " $4}')
 #LVM
-lvmu=$(if [ $(lsblk | grep lvm | wc -l) -gt 0 ]; then echo yes; else echo no; fi)
+lvmu=$(if [ $(lsblk | grep 'lvm' | wc -l) -gt 0 ]; then echo yes; else echo no; fi)
 #Connections
 tcpa=$(ss -t | grep ESTAB | wc -l)
 #Users
