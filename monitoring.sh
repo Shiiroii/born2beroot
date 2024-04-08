@@ -10,12 +10,14 @@ cpup=$(cat /proc/cpuinfo | grep "physical id" | wc -l)
 #grep processor permet de trouver le nombre de CPU
 cpuv=$(cat /proc/cpuinfo | grep 'processor' | wc -l)
 #RAM
-#free -m permet de voir la quantité de mémoire libre, le -m pour mettre en mebibytes, une unité de capacité de stockage d'informations
-#grep Mem 
+#free -m permet de voir la quantité de mémoire libre, le -m pour mettre en mégaoctets, une unité de capacité de stockage d'informations
+#grep Mem permet de trouvera la ligne Mem sortie du free -m et printera $2 qui représente le deuxième argument de cette ligne, $3 la troisième, etc..
+#{printf("%.2f"), $3/$2*100}, %.2f permet de formater la sortie avec deux chiffres après la virgule, $3/$2*100 permet de calculer l'utilisation de la mémoire
 rama=$(free -m | grep 'Mem' | awk '{print $2}')
 ramu=$(free -m | grep 'Mem' | awk '{print $3}')
 ramp=$(free -m | grep 'Mem' | awk '{printf("%.2f"), $3/$2*100}')
 #Memory
+#df permet de donner l'utilisation du disque, -Bg pour donner la quantité en bloc de données en gigaoctets, -Bm bloc en mégaoctets, -m en mégaoctets 
 mema=$(df -Bg | grep "^/dev/" | grep -v "/boot$" | awk '{disk_total += $2} END {print disk_total}')
 memu=$(df -Bm | grep "^/dev/" | grep -v "/boot$" | awk '{disk_used += $3} END {print disk_used}')
 memp=$(df -m | grep "^/dev/" | grep -v "/boot$" | awk '{disk_used += $3} {disk_total += $2} END {printf("%.2f"), disk_used/disk_total*100}')
