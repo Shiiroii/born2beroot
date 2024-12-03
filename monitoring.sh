@@ -48,7 +48,7 @@ macu=$(ip link show | grep ether | awk '{print $2}')
 #journalctl affiche les journaux du système, celle de la commande sudo, cherche les lignes avec COMMAND et compte le nombre de lignes
 sunu=$(journalctl _COMM=sudo | grep COMMAND | wc -l)
 
-wall "	#Architecture: $arc
+wall "	#Architecture: $archi
 		#Physical CPU: $cpup
 		#Virtual CPU: $cpuv
 		#RAM utilization: $ramu/${rama}MB ($ramp%)
